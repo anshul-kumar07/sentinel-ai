@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sentinel AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Motion background -->
+  <div class="bg-motion">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- INTRO -->
+  <section class="intro" id="intro">
+    <div class="intro-content">
+      <h1>Sentinel AI</h1>
+      <p>Detect hidden scam signals using explainable AI</p>
+      <button class="glass-btn" id="startBtn">Let’s Get Started</button>
+    </div>
+  </section>
+
+  <!-- APP -->
+  <main class="app hidden" id="app">
+    <div class="app-shell">
+
+      <!-- INPUT CARD -->
+      <div class="card input-card">
+        <h2>Paste suspicious message</h2>
+        <textarea id="messageInput"
+          placeholder="Paste email, SMS, WhatsApp, job or bank message here..."></textarea>
+        
+        <h3>Optional screenshot</h3>
+
+        <label class="upload-box">
+          <input type="file" hidden />
+          <div class="upload-inner">
+            <div class="icon">↑</div>
+            <strong>Select an image</strong>
+            <span>Click, drag & drop, or paste</span>
+            <small>PNG, JPG, JPEG, WEBP</small>
+          </div>
+        </label>
+        <!-- OCR OUTPUT (hidden by default) -->
+      <div id="ocrBlock" class="ocr-block hidden">
+        <h3>Extracted text from image</h3>
+        <textarea id="ocrText" readonly></textarea>
+      </div>
+
+        <div class="file-status">No image selected</div>
+
+        <button class="primary" id="analyzeBtn" onclick="analyzeMessage()">
+          Analyze Message
+        </button>
+
+        <footer>Hackathon Prototype • Explainable Scam Detection</footer>
+      </div>
+
+      <!-- OUTPUT CARD -->
+      <div class="card output-card hidden" id="outputCard">
+        <h2 id="riskTitle">Overall Risk</h2>
+      <!-- CONFIDENCE SCORE -->
+      <div class="confidence-box">
+        <div class="confidence-header">
+         <span>Confidence Score</span>
+           <span id="confidencePercent">25%</span>
+       </div>
+
+      <div class="confidence-bar">
+        <div class="confidence-fill" id="confidenceFill"></div>
+    </div>
+  </div>
+
+        <div id="reasonList"></div>
+
+        <div class="recommendation">
+          <strong>Recommendation</strong>
+          <p id="recommendationText"></p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
