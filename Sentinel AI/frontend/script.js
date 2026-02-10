@@ -32,7 +32,6 @@ async function analyzeMessage() {
 
   try {
     const res = await fetch("https://sentinel-ai-backend-k16y.onrender.com/analyze", {
- {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message })
@@ -136,4 +135,5 @@ if (percent < 30) {
 }
 
 }
+
 
