@@ -7,7 +7,19 @@ from flask_cors import CORS
 import re
 
 app = Flask(__name__)
-CORS(app)
+from flask_cors import CORS
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+# ===== ADD (CORS PREFLIGHT – ESSENTIAL) =====
+@app.route("/analyze", methods=["OPTIONS"])
+def analyze_options():
+    return "", 200
+
+@app.route("/analyze-image", methods=["OPTIONS"])
+def analyze_image_options():
+    return "", 200
+# ===========================================
+
 
 # ---------------- HELPERS ----------------
 
@@ -39,6 +51,7 @@ def is_suspicious_domain(domain):
         reasons.append("Unusually long domain name")
 
     return reasons
+
 
 def analyze_message_text(message):
     message = message.lower()
@@ -132,7 +145,10 @@ def analyze_message_text(message):
 
 @app.route("/analyze", methods=["POST"])
 def analyze_message():
-    data = request.get_json()
+    # ===== ADD (SAFE JSON – ESSENTIAL) =====
+    data = request.get_json(silent=True) or {}
+    # ======================================
+
     message = data.get("message", "").lower()
 
     explanations = []
@@ -272,11 +288,3 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
-
-
-
-
-
-
-
-
