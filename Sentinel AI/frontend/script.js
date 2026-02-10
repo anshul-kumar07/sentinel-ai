@@ -31,7 +31,8 @@ async function analyzeMessage() {
   btn.disabled = true;
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/analyze", {
+    const res = await fetch("https://sentinel-ai-backend-k16y.onrender.com/analyze", {
+ {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message })
@@ -61,7 +62,7 @@ imageInput.addEventListener("change", async () => {
   document.getElementById("outputCard").classList.add("hidden");
 
   try {
-    const res = await fetch("http://127.0.0.1:5000/analyze-image", {
+    const res = await fetch("https://sentinel-ai-backend-k16y.onrender.com/analyze-image", {
       method: "POST",
       body: formData
     });
@@ -135,3 +136,4 @@ if (percent < 30) {
 }
 
 }
+
