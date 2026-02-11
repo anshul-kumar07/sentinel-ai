@@ -190,13 +190,16 @@ def analyze_message():
 
     # 3️⃣ PAYMENT REQUEST
     payment_words = ["pay", "fee", "deposit", "registration", "processing"]
+
     if any(word in message for word in payment_words):
-        score += 25
-        
-        explanations.append({
-            "title": "Payment Request Detected",
-            "text": "The message asks for money which is a common scam pattern."
-         })
+    score += 25
+    explanations.append({
+        "title": "Payment Request Detected",
+        "text": "The message asks for money which is a common scam pattern."
+    })
+
+
+
 
     # 4️⃣ IDENTITY WEAKNESS
     if "@" not in message and "official" not in message:
@@ -283,6 +286,7 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
