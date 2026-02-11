@@ -194,9 +194,9 @@ def analyze_message():
         score += 25
         
         explanations.append({
-    "title": "Payment Request Detected",
-    "text": "The message asks for money which is a common scam pattern."
-})
+            "title": "Payment Request Detected",
+            "text": "The message asks for money which is a common scam pattern."
+         })
 
     # 4️⃣ IDENTITY WEAKNESS
     if "@" not in message and "official" not in message:
@@ -283,6 +283,7 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
 
 
