@@ -1,0 +1,11 @@
+1. Your SBI account has been suspended due to suspicious activity.
+   Verify immediately: http://sbi-secure-login.xyz
+   Failure to act within 30 minutes will permanently block your account.
+
+
+2. Dear customer, unusual login detected on your bank account.
+   Reply YES to secure your account or call 1800-XXX-XXXX.
+
+
+3. Hello, your monthly bank statement is ready.
+   Please login to your official banking app to view it.
