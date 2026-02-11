@@ -7,8 +7,11 @@ from flask_cors import CORS
 import re
 
 app = Flask(__name__)
-from flask_cors import CORS
 CORS(app, resources={r"/*": {"origins": "*"}})
+
+def extract_urls(text):
+    url_pattern = r'(https?://\S+|www\.\S+)'
+    return re.findall(url_pattern, text)
 
 # ===== ADD (CORS PREFLIGHT – ESSENTIAL) =====
 @app.route("/analyze", methods=["OPTIONS"])
@@ -156,6 +159,12 @@ def analyze_message():
 
     # 1️⃣ DOMAIN INTELLIGENCE
     domain = extract_domain(message)
+    if not domain:
+    explanations.append({
+        "title": "No Domain Found",
+        "text": "No website link was detected in this message."
+    })
+
     if domain:
         flags = is_suspicious_domain(domain)
         if flags:
@@ -183,25 +192,10 @@ def analyze_message():
     payment_words = ["pay", "fee", "deposit", "registration", "processing"]
     if any(word in message for word in payment_words):
         score += 25
-        if score < 30:
-         explanations = [
-        {
-            "title": "Verified Domain",
-            "text": "The message links to an official and trusted organization domain."
-        },
-        {
-            "title": "No Urgency Detected",
-            "text": "The message does not pressure the recipient to act immediately."
-        },
-        {
-            "title": "No Payment Request",
-            "text": "There is no request for upfront payment or sensitive financial information."
-        },
-        {
-            "title": "Professional Communication",
-            "text": "The message follows a standard professional communication pattern."
-        }
-    ]
+        explanations.append({
+    "title": "Payment Request Detected",
+    "text": "The message asks for money which is a common scam pattern."
+})
 
     # 4️⃣ IDENTITY WEAKNESS
     if "@" not in message and "official" not in message:
@@ -288,4 +282,5 @@ def home():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
 
